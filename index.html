@@ -72,6 +72,8 @@ h2 {
 }
 
 input[type=button],
+#save-button,
+#save-button2,
 #b,
 #d,
 #decode-btn,
@@ -88,6 +90,8 @@ input[type=button],
   transition: background-color 0.2s ease-out;
 }
 
+#save-button:hover,
+#save-button2:hover,
 #encode-btn:hover,
 #decode-btn:hover,
 #d:hover,
@@ -208,16 +212,78 @@ input[type=button]:hover{
 
     <div style="position: absolute;left: 50%; transform: translateX(-50%);">
 	<div style="color: #F8F8FF;text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000;"><b>
-      1.先下载<a href="https://github.com/tindy2013/subconverter/releases" target="_blank">订阅转换工具</a>，并运行<br><br>
-      2.节点链接或文件路径：<br><br><textarea placeholder="支持单个节点、多个节点、直链和本地文件路径，注意路径全英文" id="filepath" cols="100" rows="10"></textarea><br><br>
+      1.先下载<a href="https://github.com/tindy2013/subconverter/releases" target="_blank">订阅转换工具</a>，并运行exe<br><br>
+      2.节点链接或文件路径：<br><br><textarea placeholder="支持单个节点、多个节点、直链和本地文件路径，注意路径包括文件名在内必须全英文" id="filepath" cols="100" rows="10"></textarea><br><br>
       3.将格式转换为：<select id="subtype" style="font-size: 18px;">
         <option value="clash" >Clash</option>
         <option value="mixed" >Base64通用</option>
       </select><br><br>
       <input type="button" value=" 生成链接▼ " onclick="create();"> <br> <br>
-	  <textarea id="kd" placeholder="请填写上面的空格" cols="100" rows="10"></textarea>
-     </b></div>	  
+	  <textarea id="kd" placeholder="请先填写上面的空格并点击生成按钮" cols="100" rows="10"></textarea><br> <br>
+      <button id="save-button"> 保存成yaml文件 </button><button id="save-button2" style="margin-left: 10px;"> 保存成 txt 文件 </button><br> <br>
+	  </b>
+	</div>	  
     </div>
+	
+    <script>
+      const saveButton = document.querySelector("#save-button");
+      const inputText = document.querySelector("#kd");
+
+      saveButton.addEventListener("click", function() {
+        const url = inputText.value;
+
+        // 判断是否以"http://localhost:"开头
+        if (url.startsWith("http://localhost:")) {
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", url, true);
+          xhr.responseType = "blob";
+          
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+              const blob = xhr.response;
+              const link = document.createElement("a");
+              
+              link.href = window.URL.createObjectURL(blob);
+              link.download = "订阅节点.yaml";
+              link.click();
+            }
+          };
+          
+          xhr.send();
+        }
+        // 如果链接不是以"http://localhost:"开头，则不进行下载操作
+      });
+    </script>
+	
+    <script>
+      const saveButton2 = document.querySelector("#save-button2");
+      const inputText2 = document.querySelector("#kd");
+
+      saveButton2.addEventListener("click", function() {
+        const url = inputText2.value;
+
+        // 判断是否以"http://localhost:"开头
+        if (url.startsWith("http://localhost:")) {
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", url, true);
+          xhr.responseType = "blob";
+          
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+              const blob = xhr.response;
+              const link = document.createElement("a");
+              
+              link.href = window.URL.createObjectURL(blob);
+              link.download = "订阅节点.txt";
+              link.click();
+            }
+          };
+          
+          xhr.send();
+        }
+        // 如果链接不是以"http://localhost:"开头，则不进行下载操作
+      });
+    </script>
 	
     <script>
 function  create() {
@@ -226,7 +292,7 @@ function  create() {
     var filepath = document.getElementById('filepath');
     var subtype = document.getElementById('subtype');
     if (filepath.value===""){
-        alert("本地节点文件路径不能为空！");
+        alert("节点链接或文件路径不能为空！");
         return false;
     }
     kd.href = 'http://localhost:25500/sub?target='+subtype.value+'&url='+encodeURIComponent((filepath.value).replace(/\n/g,"|"))+'&insert=false'; 
