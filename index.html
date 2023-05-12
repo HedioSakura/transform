@@ -59,30 +59,22 @@ h2 {
   font-family: sans-serif;
 }
 
+#kd,
+#filepath,
+#decoded-area ,
 #encoded-area {
   background-color: rgba(211, 211, 231, 0.9);
 }
 
-#decoded-area {
-  background-color: rgba(245, 230, 245, 0.9); 
-}
-
-#a {
-  opacity: 0.9; 
-}
-
+#a,
 #c {
   opacity: 0.9; 
 }
 
-#filepath {
-  background-color: rgba(211, 211, 231, 0.9);
-}
-
-#kd {
-  background-color: rgba(245, 230, 245, 0.9);
-}
-
+input[type=button],
+#b,
+#d,
+#decode-btn,
 #encode-btn {
   display: inline-block;
   padding: 5px;
@@ -96,74 +88,10 @@ h2 {
   transition: background-color 0.2s ease-out;
 }
 
-#encode-btn:hover {
-  background-color: #0063cc;
-}
-
-#decode-btn {
-  display: inline-block;
-  padding: 5px;
-  font-size: 18px;
-  color: #fff;
-  background-color: rgba(0, 95, 200, 0.9);
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transition: background-color 0.2s ease-out;
-}
-
-#decode-btn:hover {
-  background-color: #0063cc;
-}
-
-#d {
-  display: inline-block;
-  padding: 3px;
-  font-size: 18px;
-  color: #fff;
-  background-color: rgba(0, 95, 200, 0.9);
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transition: background-color 0.2s ease-out;
-}
-
-#d:hover{
-  background-color: #0063cc;
-}
-
-#b {
-  display: inline-block;
-  padding: 3px;
-  font-size: 18px;
-  color: #fff;
-  background-color: rgba(0, 95, 200, 0.9);
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transition: background-color 0.2s ease-out;
-}
-
-#b:hover{
-  background-color: #0063cc;
-}
-
-input[type=button] {
-  display: inline-block;
-  padding: 3px;
-  font-size: 18px;
-  color: #fff;
-  background-color: rgba(0, 95, 200, 0.9);
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transition: background-color 0.2s ease-out;
-}
-
+#encode-btn:hover,
+#decode-btn:hover,
+#d:hover,
+#b:hover,
 input[type=button]:hover{
   background-color: #0063cc;
 }
@@ -286,7 +214,7 @@ input[type=button]:hover{
         <option value="clash" >clash</option>
         <option value="mixed" >Base64通用</option>
       </select><br><br>
-      <input type="button" value=" 生成链接 " onclick="create();"> <br> <br>
+      <input type="button" value=" 生成链接▼ " onclick="create();"> <br> <br>
 	  <textarea id="kd" placeholder="请填写上面的链接" cols="100" rows="10"></textarea>
      </b></div>	  
     </div>
