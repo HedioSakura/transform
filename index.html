@@ -1,28 +1,25 @@
 <!DOCTYPE html>
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html>
+    <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <title>在线转换整合</title>
 	<Link Rel="SHORTCUT ICON" href="./ICO.ico">
     <link rel="stylesheet" type="text/css" href="./index_files/index.css">
 	<div align="left"><img src="./LOGO.png" tppabs="" alt="PatternFly logo" id="qq" class="wow fadeInDown animated"
           style="visibility: visible; animation-name: fadeInDown;"></div>
-<body background="./background.jpg"
-
-style=" background-repeat:no-repeat ;
-
-background-size:cover;
-
-background-attachment: fixed;"
-
->
-</head>
+    <body background="./background.jpg"
+      style="background-repeat:no-repeat;
+             background-size:cover;
+             background-attachment: fixed;">
+    </body>
 
 <style>
 
 a {
-    color: #F8F8FF;
+    color: #bcbcbc;
+;
 	text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000;
-	text-decoration: none;
+	text-decoration: underline;
 	font-family: sans-serif;
 }
 
@@ -76,6 +73,14 @@ h2 {
 
 #c {
   opacity: 0.9; 
+}
+
+#filepath {
+  background-color: rgba(211, 211, 231, 0.9);
+}
+
+#kd {
+  background-color: rgba(245, 230, 245, 0.9);
 }
 
 #encode-btn {
@@ -145,7 +150,26 @@ h2 {
 #b:hover{
   background-color: #0063cc;
 }
+
+input[type=button] {
+  display: inline-block;
+  padding: 3px;
+  font-size: 18px;
+  color: #fff;
+  background-color: rgba(0, 95, 200, 0.9);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.2s ease-out;
+}
+
+input[type=button]:hover{
+  background-color: #0063cc;
+}
+
 </style>
+</head>
   
 <body>
     <header>
@@ -165,14 +189,13 @@ h2 {
     </div>
     <script type="text/javascript" src="./index_files/bundle.js.下载"></script>
 
-</body>
-
+<div style="width: 100%; height: 1px; background-color: white;"><p></p></div>	
+	
     <header>
         <h2>百&emsp;家&emsp;姓</h2>
     </header>
 	
 <div style="display:flex; justify-content:center;">
-<body>
 <input type="text" id="c" style="width:400px;">
 <input type="button" id="d" value=" 转换成百家姓 &gt;&gt ">
 <input type="text" id="a" style="width:400px;">
@@ -236,8 +259,9 @@ h2 {
         return '';
     }
 </script>
-</body>
 </div>
+
+<div style="width: 100%; height: 1px; background-color: white;"><p></p></div>
 
     <header>
         <h2><p>外 部 链 接</p></h2>
@@ -247,5 +271,41 @@ h2 {
   <div style="margin: 0;"><font size="6"><b><a href="https://www.keyfc.net/bbs/tools/tudoucode.aspx"target="_blank">与佛论禅</a></b></font></div>
   <div style="margin: 0;"><font size="6"><b><a href="http://hi.pcmoe.net/index.html"target="_blank">与熊论道</a></b></font></div>
 </div>
+
+<div style="width: 100%; height: 1px; background-color: white;"><p></p></div>
+
+    <header>
+        <h2>Clash订阅转换工具</h2>
+    </header>
+
+    <div style="position: absolute;left: 50%; transform: translateX(-50%);">
+	<div style="color: #F8F8FF;text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000;"><b>
+      1.先下载<a href="https://github.com/tindy2013/subconverter/releases" target="_blank">订阅转换工具</a>，并运行<br><br>
+      2.节点文件路径：<br><br><textarea placeholder="支持单个节点、多个节点、直链和本地文件路径，注意路径全英文" id="filepath" cols="100" rows="10"></textarea><br><br>
+      3.将格式转换为：<select id="subtype" style="font-size: 18px;">
+        <option value="clash" >clash</option>
+        <option value="mixed" >Base64通用</option>
+      </select><br><br>
+      <input type="button" value=" 生成链接 " onclick="create();"> <br> <br>
+	  <textarea id="kd" placeholder="请填写上面的链接" cols="100" rows="10"></textarea>
+     </b></div>	  
+    </div>
+	
+    <script>
+function  create() {
+    var input = document.getElementById('content');
+    var kd = document.getElementById('kd');
+    var filepath = document.getElementById('filepath');
+    var subtype = document.getElementById('subtype');
+    if (filepath.value===""){
+        alert("本地节点文件路径不能为空！");
+        return false;
+    }
+    kd.href = 'http://localhost:25500/sub?target='+subtype.value+'&url='+encodeURIComponent((filepath.value).replace(/\n/g,"|"))+'&insert=false'; 
+    kd.style = ''; 
+    kd.innerText = 'http://localhost:25500/sub?target='+subtype.value+'&url='+encodeURIComponent((filepath.value).replace(/\n/g,"|"))+'&insert=false'; 
+} 
+    </script>
+  </body>
 
 </html>
