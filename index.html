@@ -77,6 +77,74 @@ h2 {
 #c {
   opacity: 0.9; 
 }
+
+#encode-btn {
+  display: inline-block;
+  padding: 5px;
+  font-size: 18px;
+  color: #fff;
+  background-color: rgba(0, 95, 200, 0.9);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.2s ease-out;
+}
+
+#encode-btn:hover {
+  background-color: #0063cc;
+}
+
+#decode-btn {
+  display: inline-block;
+  padding: 5px;
+  font-size: 18px;
+  color: #fff;
+  background-color: rgba(0, 95, 200, 0.9);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.2s ease-out;
+}
+
+#decode-btn:hover {
+  background-color: #0063cc;
+}
+
+#d {
+  display: inline-block;
+  padding: 3px;
+  font-size: 18px;
+  color: #fff;
+  background-color: rgba(0, 95, 200, 0.9);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.2s ease-out;
+}
+
+#d:hover{
+  background-color: #0063cc;
+}
+
+#b {
+  display: inline-block;
+  padding: 3px;
+  font-size: 18px;
+  color: #fff;
+  background-color: rgba(0, 95, 200, 0.9);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.2s ease-out;
+}
+
+#b:hover{
+  background-color: #0063cc;
+}
 </style>
   
 <body>
@@ -87,10 +155,10 @@ h2 {
         <textarea id="decoded-area" placeholder="Decoded Text Here"></textarea>
         <div class="buttons">
             
-                <button id="encode-btn">转换成核心价值观 &gt;&gt;</button>
+                <button id="encode-btn"> 转换成核心价值观 &gt;&gt; </button>
           
             
-                <button id="decode-btn">&lt;&lt; 转换成磁力链接</button>
+                <button id="decode-btn"> &lt;&lt; 转换成磁力链接 </button>
             
         </div>
         <textarea id="encoded-area" placeholder="Encoded Text Here"></textarea>
@@ -106,9 +174,9 @@ h2 {
 <div style="display:flex; justify-content:center;">
 <body>
 <input type="text" id="c" style="width:400px;">
-<input type="button" id="d" value="转换成百家姓&gt;&gt;&gt;&gt;&gt;">
+<input type="button" id="d" value=" 转换成百家姓 &gt;&gt ">
 <input type="text" id="a" style="width:400px;">
-<input type="button" id="b" value="&lt;&lt;&lt;&lt;&lt;转换成磁力"><br>
+<input type="button" id="b" value=" &lt;&lt; 转换成磁力 "><br>
 
 <script>
     var t='magnet:?xt=urn:btih:';
