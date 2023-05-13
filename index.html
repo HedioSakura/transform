@@ -1,354 +1,346 @@
 <!DOCTYPE html>
 <html>
     <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <title>在线转换整合</title>
+        <Link Rel="SHORTCUT ICON" href="./ICO.ico">
+        <link rel="stylesheet" type="text/css" href="./index_files/index.css">
+        <div align="left"><img src="./LOGO.png" tppabs="" alt="PatternFly logo" id="qq" class="wow fadeInDown animated"
+        style="visibility: visible; animation-name: fadeInDown;"></div>
+        <body background="./background.jpg"
+            style="background-repeat:no-repeat;
+            background-size:cover;
+            background-attachment: fixed;">
+        </body>
+        <style>
+        a {
+        color: #bcbcbc;
+        ;
+            text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000;
+            text-decoration: underline;
+            font-family: sans-serif;
+        }
+        a:hover {
+        color: #D3D3E7;
+            text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000;
+            }
+        .splash{
+        position: relative;
+        }
+        img#qq {
+        width: 128px;
+        background-size: cover;
+        border-radius: 200px;
+        box-shadow: 0px 0px 40px rgba(63, 81, 181, 0.72);
+        border: 3px solid #00008B;
+        opacity: 1;
+        margin: 0 auto;
+            margin-bottom: 20px;
+            transition: all 1.0s;
+        }
+        #qq:hover {
+        box-shadow: 0 0 10px #fff;
+        -webkit-box-shadow: 0 0 19px #fff;
+        transform:rotate(360deg);
+            -ms-transform:rotate(360deg);   /* IE 9 */
+            -moz-transform:rotate(360deg);  /* Firefox */
+        -webkit-transform:rotate(360deg); /* Safari 和 Chrome */
+            -o-transform:rotate(360deg);    /* Opera */
+        filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+        }
+        h2 {
+        color: white;
+        text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000;
+        text-decoration: none;
+        font-family: sans-serif;
+        }
+        #kd,
+        #filepath,
+        #decoded-area ,
+        #encoded-area {
+        background-color: rgba(211, 211, 231, 0.9);
+        }
+        #subtype,
+        #a,
+        #c {
+        opacity: 0.9;
+        }
+        #t-button,
+        #generate-link-button,
+        input[type=button],
+        #save-button,
+        #save-button2,
+        #b,
+        #d,
+        #decode-btn,
+        #encode-btn {
+        display: inline-block;
+        padding: 5px;
+        font-size: 18px;
+        color: #fff;
+        background-color: rgba(0, 95, 200, 0.9);
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: background-color 0.2s ease-out;
+        }
+        #t-button:hover,
+        #generate-link-button:hover,
+        #save-button:hover,
+        #save-button2:hover,
+        #encode-btn:hover,
+        #decode-btn:hover,
+        #d:hover,
+        #b:hover,
+        input[type=button]:hover{
+        background-color: #0063cc;
+        }
+        .collapse {
+        display: none;
+        }
+        </style>
+    </head>
     
-    <title>在线转换整合</title>
-	<Link Rel="SHORTCUT ICON" href="./ICO.ico">
-    <link rel="stylesheet" type="text/css" href="./index_files/index.css">
-	<div align="left"><img src="./LOGO.png" tppabs="" alt="PatternFly logo" id="qq" class="wow fadeInDown animated"
-          style="visibility: visible; animation-name: fadeInDown;"></div>
-    <body background="./background.jpg"
-      style="background-repeat:no-repeat;
-             background-size:cover;
-             background-attachment: fixed;">
-    </body>
-
-<style>
-
-a {
-    color: #bcbcbc;
-;
-	text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000;
-	text-decoration: underline;
-	font-family: sans-serif;
-}
-
-a:hover {
-    color: #D3D3E7;
-	text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000;
-	}
-.splash{
-  position: relative;
-  }
-  img#qq {
-    width: 128px;
-    background-size: cover;
-    border-radius: 200px;
-    box-shadow: 0px 0px 40px rgba(63, 81, 181, 0.72);
-    border: 3px solid #00008B;
-    opacity: 1;
-    margin: 0 auto;
-	margin-bottom: 20px;
-	transition: all 1.0s;  
-}
-#qq:hover {
-    box-shadow: 0 0 10px #fff;
-    -webkit-box-shadow: 0 0 19px #fff;
-    transform:rotate(360deg);
-    -ms-transform:rotate(360deg); 	/* IE 9 */
-    -moz-transform:rotate(360deg); 	/* Firefox */
-    -webkit-transform:rotate(360deg); /* Safari 和 Chrome */
-    -o-transform:rotate(360deg); 	/* Opera */
-    filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
-}
-
-h2 {
-  color: white;
-  text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000;
-  text-decoration: none;
-  font-family: sans-serif;
-}
-
-#kd,
-#filepath,
-#decoded-area ,
-#encoded-area {
-  background-color: rgba(211, 211, 231, 0.9);
-}
-
-#subtype,
-#a,
-#c {
-  opacity: 0.9; 
-}
-
-#generate-link-button,
-input[type=button],
-#save-button,
-#save-button2,
-#b,
-#d,
-#decode-btn,
-#encode-btn {
-  display: inline-block;
-  padding: 5px;
-  font-size: 18px;
-  color: #fff;
-  background-color: rgba(0, 95, 200, 0.9);
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transition: background-color 0.2s ease-out;
-}
-
-#generate-link-button:hover,
-#save-button:hover,
-#save-button2:hover,
-#encode-btn:hover,
-#decode-btn:hover,
-#d:hover,
-#b:hover,
-input[type=button]:hover{
-  background-color: #0063cc;
-}
-
-</style>
-</head>
-  
-<body>
-    <header>
-        <h2>核心价值观</h2>
-    </header>
-    <div class="content">
-        <textarea id="decoded-area" placeholder="Decoded Text Here"></textarea>
-        <div class="buttons">
-            
+    <body>
+        <header>
+            <h2>核心价值观</h2>
+        </header>
+        <div class="content">
+            <textarea id="decoded-area" placeholder="Decoded Text Here"></textarea>
+            <div class="buttons">
+                
                 <button id="encode-btn"> 转成核心价值观 &gt;&gt; </button>
-          
-            
+                
+                
                 <button id="decode-btn"> &lt;&lt; 转换成磁力链接 </button>
-            
+                
+            </div>
+            <textarea id="encoded-area" placeholder="Encoded Text Here"></textarea>
         </div>
-        <textarea id="encoded-area" placeholder="Encoded Text Here"></textarea>
-    </div>
-    <script type="text/javascript" src="./index_files/bundle.js.下载"></script>
-
-<div style="width: 100%; height: 1px; background-color: white;"><p></p></div>	
-	
-    <header>
-        <h2>百&emsp;家&emsp;姓</h2>
-    </header>
-	
-<div style="display:flex; justify-content:center;">
-<input type="text" id="c" style="width:400px;">
-<input type="button" id="d" value=" 转换成百家姓 &gt;&gt ">
-<input type="text" id="a" style="width:400px;">
-<input type="button" id="b" value=" &lt;&lt; 转换成磁力 "><br>
-
-<script>
-    var t='magnet:?xt=urn:btih:';
-    var obja={
-        "赵":"0", "钱":"1", "孙":"2", "李":"3", "周":"4", "吴":"5", "郑":"6", "王":"7", "冯":"8", "陈":"9",
-        "褚":"a", "卫":"b", "蒋":"c", "沈":"d", "韩":"e", "杨":"f", "朱":"g", "秦":"h", "尤":"i", "许":"j",
-        "何":"k", "吕":"l", "施":"m", "张":"n", "孔":"o", "曹":"p", "严":"q", "华":"r", "金":"s", "魏":"t",
-        "陶":"u", "姜":"v", "戚":"w", "谢":"x", "邹":"y", "喻":"z", "福":"A", "水":"B", "窦":"C", "章":"D",
-        "云":"E", "苏":"F", "潘":"G", "葛":"H", "奚":"I", "范":"J", "彭":"K", "郎":"L", "鲁":"M", "韦":"N",
-        "昌":"O", "马":"P", "苗":"Q", "凤":"R", "花":"S", "方":"T", "俞":"U", "任":"V", "袁":"W", "柳":"X",
-        "唐":"Y", "罗":"Z", "薛":".", "伍":"-", "余":"_", "米":"+", "贝":"=", "姚":"/", "孟":"?", "顾":"#",
-        "尹":"%", "江":"&", "钟":"*"
-    };
-
-    var b = document.getElementById("b");
-    b.addEventListener("click", function() {
-        var str = document.getElementById("a").value;
-        str=str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-        var strc = str.split("");
-        var c  = '';
-        for(var i=0;i<strc.length;i++){
+        <script type="text/javascript" src="./index_files/bundle.js.下载"></script>
+        <div style="width: 100%; height: 1px; background-color: white;"><p></p></div>
+        
+        <header>
+            <h2>百&emsp;家&emsp;姓</h2>
+        </header>
+        
+        <div style="display:flex; justify-content:center;">
+            <input type="text" id="c" style="width:400px;">
+            <input type="button" id="d" value=" 转换成百家姓 &gt;&gt ">
+            <input type="text" id="a" style="width:400px;">
+            <input type="button" id="b" value=" &lt;&lt; 转换成磁力 "><br>
+            <script>
+            var t='magnet:?xt=urn:btih:';
+            var obja={
+            "赵":"0", "钱":"1", "孙":"2", "李":"3", "周":"4", "吴":"5", "郑":"6", "王":"7", "冯":"8", "陈":"9",
+            "褚":"a", "卫":"b", "蒋":"c", "沈":"d", "韩":"e", "杨":"f", "朱":"g", "秦":"h", "尤":"i", "许":"j",
+            "何":"k", "吕":"l", "施":"m", "张":"n", "孔":"o", "曹":"p", "严":"q", "华":"r", "金":"s", "魏":"t",
+            "陶":"u", "姜":"v", "戚":"w", "谢":"x", "邹":"y", "喻":"z", "福":"A", "水":"B", "窦":"C", "章":"D",
+            "云":"E", "苏":"F", "潘":"G", "葛":"H", "奚":"I", "范":"J", "彭":"K", "郎":"L", "鲁":"M", "韦":"N",
+            "昌":"O", "马":"P", "苗":"Q", "凤":"R", "花":"S", "方":"T", "俞":"U", "任":"V", "袁":"W", "柳":"X",
+            "唐":"Y", "罗":"Z", "薛":".", "伍":"-", "余":"_", "米":"+", "贝":"=", "姚":"/", "孟":"?", "顾":"#",
+            "尹":"%", "江":"&", "钟":"*"
+            };
+            var b = document.getElementById("b");
+            b.addEventListener("click", function() {
+            var str = document.getElementById("a").value;
+            str=str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+            var strc = str.split("");
+            var c  = '';
+            for(var i=0;i<strc.length;i++){
             var o=cy(obja,strc[i]);
             c +=o;
-        }
-        c=t+c;
-        document.getElementById('c').value=c;
-    });
-
-    var d = document.getElementById("d");
-    d.addEventListener("click", function() {
-        var str = document.getElementById("c").value;
-        str=str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-        var v=str.replace(/magnet:\?xt=urn:btih:/,"");
-        var strc = v.split("");
-        var a  = '';
-        for(var i=0;i<strc.length;i++){
+            }
+            c=t+c;
+            document.getElementById('c').value=c;
+            });
+            var d = document.getElementById("d");
+            d.addEventListener("click", function() {
+            var str = document.getElementById("c").value;
+            str=str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+            var v=str.replace(/magnet:\?xt=urn:btih:/,"");
+            var strc = v.split("");
+            var a  = '';
+            for(var i=0;i<strc.length;i++){
             a +=ay(obja,strc[i]);
-        }
-        document.getElementById('a').value=a;
-    });
-
-
-    function cy(array,val){
-        for( var key in array ){
+            }
+            document.getElementById('a').value=a;
+            });
+            function cy(array,val){
+            for( var key in array ){
             if(key==val){
-                return array[key];
+            return array[key];
             }
-        }
-        return '';
-    }
-    function ay(array,val){
-        for( var key in array ){
+            }
+            return '';
+            }
+            function ay(array,val){
+            for( var key in array ){
             if(array[key]==val){
-                return key;
+            return key;
             }
+            }
+            return '';
+            }
+            </script>
+        </div>
+        <div style="width: 100%; height: 1px; background-color: white;"><p></p></div>
+        <header>
+            <h2><p>外 部 链 接</p></h2>
+        </header>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+            <div style="margin: 0;"><font size="6"><b><a href="https://www.keyfc.net/bbs/tools/tudoucode.aspx"target="_blank">与佛论禅</a></b></font></div>
+            <div style="margin: 0;"><font size="6"><b><a href="http://hi.pcmoe.net/index.html"target="_blank">与熊论道</a></b></font></div>
+        </div>
+        <div style="width: 100%; height: 1px; background-color: white;"><p></p></div>
+        <header>
+            <h2>机场订阅转换</h2>
+        </header>
+        <button class="toggle-button" id="t-button" style="position: fixed;bottom: 0; left: 0;">展开</button>
+        <div class="my-div collapse">
+            <div style="position: absolute;left: 50%; transform: translateX(-50%);">
+                <div style="color: #F8F8FF;text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000;"><b>
+                    <p>1.先下载<a href="https://github.com/tindy2013/subconverter/releases" target="_blank">订阅转换工具</a>，解压并运行"subconverter.exe"</p>
+                    <p>2.节点链接或文件路径：</p>
+                    <textarea placeholder="支持单个节点、多个节点、直链和本地文件路径，注意路径包括文件名在内必须全英文" id="filepath" cols="100" rows="10"></textarea><br>
+                    <p>3.将格式转换为：</p>
+                    <select id="subtype" style="font-size: 18px;">
+                        <option value="clash">Clash</option>
+                        <option value="mixed">Base64通用</option>
+                    </select><br><br>
+                    <input type="button" value="生成链接" onclick="create();"> <br> <br>
+                    <textarea id="kd" placeholder="请先填写上面的空格并点击生成按钮，多次转换记得刷新网页" cols="100" rows="10"></textarea><br> <br>
+                    <button id="save-button">保存成yaml文件</button><button id="save-button2" style="margin-left: 10px;">保存成txt文件</button><br><br>
+                    </b>
+                </div>
+            </div>
+        </div>
+        
+        <div style="position: fixed;bottom: 0; right: 0;">
+            <button id="generate-link-button">自动获取订阅</button>
+        </div>
+        
+        <script>
+        let toggleButton = document.querySelector('.toggle-button');
+        let content = document.querySelector('.my-div.collapse');
+        toggleButton.addEventListener('click', () => {
+        if (content.style.display === 'none') {
+        content.style.display = 'block';
+        toggleButton.textContent = '折叠';
+        } else {
+        content.style.display = 'none';
+        toggleButton.textContent = '展开';
         }
-        return '';
-    }
-</script>
-</div>
-
-<div style="width: 100%; height: 1px; background-color: white;"><p></p></div>
-
-    <header>
-        <h2><p>外 部 链 接</p></h2>
-    </header>
-
-<div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
-  <div style="margin: 0;"><font size="6"><b><a href="https://www.keyfc.net/bbs/tools/tudoucode.aspx"target="_blank">与佛论禅</a></b></font></div>
-  <div style="margin: 0;"><font size="6"><b><a href="http://hi.pcmoe.net/index.html"target="_blank">与熊论道</a></b></font></div>
-</div>
-
-<div style="width: 100%; height: 1px; background-color: white;"><p></p></div>
-
-    <header>
-        <h2>机场订阅转换</h2>
-    </header>
-
-    <div style="position: absolute;left: 50%; transform: translateX(-50%);">
-	<div style="color: #F8F8FF;text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000;"><b>
-      1.先下载<a href="https://github.com/tindy2013/subconverter/releases" target="_blank">订阅转换工具</a>，解压并运行"subconverter.exe"<br><br>
-      2.节点链接或文件路径：<br><br><textarea placeholder="支持单个节点、多个节点、直链和本地文件路径，注意路径包括文件名在内必须全英文" id="filepath" cols="100" rows="10"></textarea><br><br>
-      3.将格式转换为：<select id="subtype" style="font-size: 18px;">
-        <option value="clash" >Clash</option>
-        <option value="mixed" >Base64通用</option>
-      </select><br><br>
-      <input type="button" value=" 生成链接▼ " onclick="create();"> <br> <br>
-	  <textarea id="kd" placeholder="请先填写上面的空格并点击生成按钮，多次转换记得刷新网页" cols="100" rows="10"></textarea><br> <br>
-      <button id="save-button"> 保存成yaml文件 </button><button id="save-button2" style="margin-left: 10px;"> 保存成 txt 文件 </button><br> <br>
-	  </b>
-	</div>	  
-    </div>
-	
-	<div style="position: fixed;bottom: 0; right: 0;">
-	<button id="generate-link-button">自动获取一个订阅</button>
-	</div>
-	
-<script>
-  // Get the button element and add a click event listener
-  var generateButton = document.getElementById("generate-link-button");
-  generateButton.addEventListener("click", function() {
-    // Get the current date and time
-    var now = new Date();
-    var formattedDate = formatDate(now);
-
-    // Generate the link with the current date
-    var link = "https://clashnode.com/wp-content/uploads/" + formattedDate.substr(0, 4) + "/" + formattedDate.substr(4, 2) + "/" + formattedDate + ".yaml";
-
-    // Fill the textarea with the generated link
-    var textarea = document.getElementById("filepath");
-    textarea.value = link;
-  });
-
-  // Helper function to format the date as YYYYMMDD
-  function formatDate(date) {
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
-
-    if (month < 10) {
-      month = "0" + month;
-    }
-
-    if (day < 10) {
-      day = "0" + day;
-    }
-
-    return year + "" + month + "" + day;
-  }
-</script>
-	
-    <script>
-      const saveButton = document.querySelector("#save-button");
-      const inputText = document.querySelector("#kd");
-
-      saveButton.addEventListener("click", function() {
+        });
+        </script>
+        
+        <script>
+        // Get the button element and add a click event listener
+        var generateButton = document.getElementById("generate-link-button");
+        generateButton.addEventListener("click", function() {
+        // Get the current date and time
+        var now = new Date();
+        var formattedDate = formatDate(now);
+        // Generate the link with the current date
+        var link = "https://clashnode.com/wp-content/uploads/" + formattedDate.substr(0, 4) + "/" + formattedDate.substr(4, 2) + "/" + formattedDate + ".yaml";
+        // Fill the textarea with the generated link
+        var textarea = document.getElementById("filepath");
+        textarea.value = link;
+        });
+        // Helper function to format the date as YYYYMMDD
+        function formatDate(date) {
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        if (month < 10) {
+        month = "0" + month;
+        }
+        if (day < 10) {
+        day = "0" + day;
+        }
+        return year + "" + month + "" + day;
+        }
+        </script>
+        
+        <script>
+        const saveButton = document.querySelector("#save-button");
+        const inputText = document.querySelector("#kd");
+        saveButton.addEventListener("click", function() {
         const url = inputText.value;
-		if (url === ""){
+                if (url === ""){
         alert("请先填写节点链接或文件路径并点击生成链接按钮！");
         return false;
         }
-
         // 判断是否以"http://localhost:"开头
         if (url.startsWith("http://localhost:")) {
-          const xhr = new XMLHttpRequest();
-          xhr.open("GET", url, true);
-          xhr.responseType = "blob";
-          
-          xhr.onload = function() {
-            if (xhr.status === 200) {
-              const blob = xhr.response;
-              const link = document.createElement("a");
-              
-              link.href = window.URL.createObjectURL(blob);
-              link.download = "订阅节点.yaml";
-              link.click();
-            }
-          };
-          
-          xhr.send();
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.responseType = "blob";
+        
+        xhr.onload = function() {
+        if (xhr.status === 200) {
+        const blob = xhr.response;
+        const link = document.createElement("a");
+        
+        link.href = window.URL.createObjectURL(blob);
+        link.download = "订阅节点.yaml";
+        link.click();
+        }
+        };
+        
+        xhr.send();
         }
         // 如果链接不是以"http://localhost:"开头，则不进行下载操作
-      });
-    </script>
-	
-    <script>
-      const saveButton2 = document.querySelector("#save-button2");
-      const inputText2 = document.querySelector("#kd");
-
-      saveButton2.addEventListener("click", function() {
+        });
+        </script>
+        
+        <script>
+        const saveButton2 = document.querySelector("#save-button2");
+        const inputText2 = document.querySelector("#kd");
+        saveButton2.addEventListener("click", function() {
         const url = inputText2.value;
-		if (url === ""){
+                if (url === ""){
         alert("请先填写节点链接或文件路径并点击生成链接按钮！");
         return false;
         }
-
         // 判断是否以"http://localhost:"开头
         if (url.startsWith("http://localhost:")) {
-          const xhr = new XMLHttpRequest();
-          xhr.open("GET", url, true);
-          xhr.responseType = "blob";
-          
-          xhr.onload = function() {
-            if (xhr.status === 200) {
-              const blob = xhr.response;
-              const link = document.createElement("a");
-              
-              link.href = window.URL.createObjectURL(blob);
-              link.download = "订阅节点.txt";
-              link.click();
-            }
-          };
-          
-          xhr.send();
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.responseType = "blob";
+        
+        xhr.onload = function() {
+        if (xhr.status === 200) {
+        const blob = xhr.response;
+        const link = document.createElement("a");
+        
+        link.href = window.URL.createObjectURL(blob);
+        link.download = "订阅节点.txt";
+        link.click();
+        }
+        };
+        
+        xhr.send();
         }
         // 如果链接不是以"http://localhost:"开头，则不进行下载操作
-      });
-    </script>
-	
-    <script>
-function  create() {
-    var input = document.getElementById('content');
-    var kd = document.getElementById('kd');
-    var filepath = document.getElementById('filepath');
-    var subtype = document.getElementById('subtype');
-    if (filepath.value===""){
+        });
+        </script>
+        
+        <script>
+        function  create() {
+        var input = document.getElementById('content');
+        var kd = document.getElementById('kd');
+        var filepath = document.getElementById('filepath');
+        var subtype = document.getElementById('subtype');
+        if (filepath.value===""){
         alert("节点链接或文件路径不能为空！");
         return false;
-    }
-    kd.href = 'http://localhost:25500/sub?target='+subtype.value+'&url='+encodeURIComponent((filepath.value).replace(/\n/g,"|"))+'&insert=false'; 
-    kd.style = ''; 
-    kd.innerText = 'http://localhost:25500/sub?target='+subtype.value+'&url='+encodeURIComponent((filepath.value).replace(/\n/g,"|"))+'&insert=false'; 
-} 
-    </script>
-  </body>
-
+        }
+        kd.href = 'http://localhost:25500/sub?target='+subtype.value+'&url='+encodeURIComponent((filepath.value).replace(/\n/g,"|"))+'&insert=false';
+        kd.style = '';
+        kd.innerText = 'http://localhost:25500/sub?target='+subtype.value+'&url='+encodeURIComponent((filepath.value).replace(/\n/g,"|"))+'&insert=false';
+        }
+        </script>
+    </body>
 </html>
