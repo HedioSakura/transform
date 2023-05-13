@@ -72,6 +72,7 @@ h2 {
   opacity: 0.9; 
 }
 
+#generate-link-button,
 input[type=button],
 #save-button,
 #save-button2,
@@ -91,6 +92,7 @@ input[type=button],
   transition: background-color 0.2s ease-out;
 }
 
+#generate-link-button:hover,
 #save-button:hover,
 #save-button2:hover,
 #encode-btn:hover,
@@ -225,6 +227,44 @@ input[type=button]:hover{
 	  </b>
 	</div>	  
     </div>
+	
+	<div style="position: fixed;bottom: 0; right: 0;">
+	<button id="generate-link-button">自动获取一个订阅</button>
+	</div>
+	
+<script>
+  // Get the button element and add a click event listener
+  var generateButton = document.getElementById("generate-link-button");
+  generateButton.addEventListener("click", function() {
+    // Get the current date and time
+    var now = new Date();
+    var formattedDate = formatDate(now);
+
+    // Generate the link with the current date
+    var link = "https://clashnode.com/wp-content/uploads/" + formattedDate.substr(0, 4) + "/" + formattedDate.substr(4, 2) + "/" + formattedDate + ".yaml";
+
+    // Fill the textarea with the generated link
+    var textarea = document.getElementById("filepath");
+    textarea.value = link;
+  });
+
+  // Helper function to format the date as YYYYMMDD
+  function formatDate(date) {
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+
+    if (month < 10) {
+      month = "0" + month;
+    }
+
+    if (day < 10) {
+      day = "0" + day;
+    }
+
+    return year + "" + month + "" + day;
+  }
+</script>
 	
     <script>
       const saveButton = document.querySelector("#save-button");
