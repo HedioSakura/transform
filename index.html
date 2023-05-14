@@ -236,37 +236,40 @@
         </script>
         
 <script>
-    // Get the button element and add a click event listener
-    var generateButton = document.getElementById("generate-link-button");
-    generateButton.addEventListener("click", function() {
-        // Get the current date and time
-        var now = new Date();
-        var formattedDate = formatDate(now);
-        // Generate the link with the current date
-        var link = "https://clashnode.com/wp-content/uploads/" + formattedDate.substr(0, 4) + "/" + formattedDate.substr(4, 2) + "/" + formattedDate + ".yaml";
-        // Fill the textarea with the generated link
-        var textarea = document.getElementById("filepath");
-        textarea.value = link;
-        // Copy the generated link to clipboard
-        navigator.clipboard.writeText(link).then(function() {
-            console.log('Link copied to clipboard.');
-        }, function(error) {
-            console.error('Failed to copy link: ', error);
-        });
-    });
-    // Helper function to format the date as YYYYMMDD
-    function formatDate(date) {
-        var year = date.getFullYear();
-        var month = date.getMonth() + 1;
-        var day = date.getDate();
-        if (month < 10) {
-            month = "0" + month;
-        }
-        if (day < 10) {
-            day = "0" + day;
-        }
-        return year + "" + month + "" + day;
-    }
+// Get the button element and add a click event listener
+var generateButton = document.getElementById("generate-link-button");
+generateButton.addEventListener("click", function() {
+// Get the current date and time
+var now = new Date();
+if (now.getHours() < 11) { // add condition to check if current time is before noon
+now.setDate(now.getDate() - 1); // set date to previous day
+}
+var formattedDate = formatDate(now);
+// Generate the link with the current date
+var link = "https://clashnode.com/wp-content/uploads/" + formattedDate.substr(0, 4) + "/" + formattedDate.substr(4, 2) + "/" + formattedDate + ".yaml";
+// Fill the textarea with the generated link
+var textarea = document.getElementById("filepath");
+textarea.value = link;
+// Copy the generated link to clipboard
+navigator.clipboard.writeText(link).then(function() {
+console.log('Link copied to clipboard.');
+}, function(error) {
+console.error('Failed to copy link: ', error);
+});
+});
+// Helper function to format the date as YYYYMMDD
+function formatDate(date) {
+var year = date.getFullYear();
+var month = date.getMonth() + 1;
+var day = date.getDate();
+if (month < 10) {
+month = "0" + month;
+}
+if (day < 10) {
+day = "0" + day;
+}
+return year + "" + month + "" + day;
+}
 </script>
         
         <script>
