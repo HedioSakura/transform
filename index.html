@@ -16,14 +16,14 @@
         a {
         color: #bcbcbc;
         ;
-            text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000;
-            text-decoration: underline;
-            font-family: sans-serif;
+        text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000;
+        text-decoration: underline;
+        font-family: sans-serif;
         }
         a:hover {
         color: #D3D3E7;
-            text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000;
-            }
+        text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000;
+        }
         .splash{
         position: relative;
         }
@@ -35,17 +35,17 @@
         border: 3px solid #00008B;
         opacity: 1;
         margin: 0 auto;
-            margin-bottom: 20px;
-            transition: all 1.0s;
+        margin-bottom: 20px;
+        transition: all 1.0s;
         }
         #qq:hover {
         box-shadow: 0 0 10px #fff;
         -webkit-box-shadow: 0 0 19px #fff;
         transform:rotate(360deg);
-            -ms-transform:rotate(360deg);   /* IE 9 */
-            -moz-transform:rotate(360deg);  /* Firefox */
+        -ms-transform:rotate(360deg);   /* IE 9 */
+        -moz-transform:rotate(360deg);  /* Firefox */
         -webkit-transform:rotate(360deg); /* Safari 和 Chrome */
-            -o-transform:rotate(360deg);    /* Opera */
+        -o-transform:rotate(360deg);    /* Opera */
         filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
         }
         h2 {
@@ -65,6 +65,7 @@
         #c {
         opacity: 0.9;
         }
+                #fileInput,
         #t-button,
         #generate-link-button,
         input[type=button],
@@ -85,6 +86,7 @@
         cursor: pointer;
         transition: background-color 0.2s ease-out;
         }
+                #fileInput:hover,
         #t-button:hover,
         #generate-link-button:hover,
         #save-button:hover,
@@ -186,6 +188,7 @@
             </script>
         </div>
         <div style="width: 100%; height: 1px; background-color: white;"><p></p></div>
+        
         <header>
             <h2><p>外 部 链 接</p></h2>
         </header>
@@ -194,162 +197,247 @@
             <div style="margin: 0;"><font size="6"><b><a href="http://hi.pcmoe.net/index.html"target="_blank">与熊论道</a></b></font></div>
         </div>
         <div style="width: 100%; height: 1px; background-color: white;"><p></p></div>
+        
         <header>
-            <h2>机场订阅转换</h2>
+            <h2><p>修复txt文本非法断行</p></h2>
         </header>
-        <button class="toggle-button" id="t-button" style="position: fixed;bottom: 0; left: 0;">😎</button>
-        <div class="my-div collapse">
-            <div style="position: absolute;left: 50%; transform: translateX(-50%);">
-                <div style="color: #F8F8FF;text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000;"><b>
-                    <p>1.先下载<a href="https://github.com/tindy2013/subconverter/releases" target="_blank">订阅转换工具</a>，解压并运行"subconverter.exe"</p>
-                    <p>2.节点链接或文件路径：</p>
-                    <textarea placeholder="支持单个节点、多个节点、直链和本地文件路径，注意路径包括文件名在内必须全英文" id="filepath" cols="100" rows="10"></textarea><br>
-                    <p>3.将格式转换为：</p>
-                    <select id="subtype" style="font-size: 18px;">
-                        <option value="clash">Clash</option>
-                        <option value="mixed">Base64通用</option>
-                    </select><br><br>
-                    <input type="button" value="生成链接" onclick="create();"> <br> <br>
-                    <textarea id="kd" placeholder="请先填写上面的空格并点击生成按钮，多次转换记得刷新网页" cols="100" rows="10"></textarea><br> <br>
-                    <button id="save-button">保存成yaml文件</button><button id="save-button2" style="margin-left: 10px;">保存成txt文件</button><br><br>
-                    </b>
+        <body>
+            <div style="display: flex; justify-content: center;">
+                <input type="file" id="fileInput" onchange="handleFileSelect(event)" accept=".txt" title="目前仅支持修复UTF-8文本"><br>
+            </div>
+            <script>
+            // 自动触发文件上传事件
+            let fileInput = document.getElementById("fileInput");
+            fileInput.click();
+            </script>
+        </body>
+        
+        <script type="text/javascript">
+        // 读取上传的txt文件并自动拼接
+        function handleFileSelect(evt) {
+        let files = evt.target.files; // 获取用户选择的txt文件
+        let text = ""; // 保存文件内容
+        if (files.length == 0) return;
+        let reader = new FileReader();
+        reader.onload = function(e) { // 当文件加载完成后执行
+        let lines = e.target.result.split('\n'); // 将文件内容按行分割为数组
+        // 对每一行进行处理并拼接
+        let formatted_lines = [];
+        let buffer = '';
+        for (let i = 0; i<lines.length; i++){
+            let line = lines[i].trim(); // 去掉每一行的换行符
+            // 以下是新增的处理逻辑
+            line = line.replace(/「/g, '“').replace(/『/g, '“').replace(/」/g, '”').replace(/』/g, '”');
+            if (line.length === 0){ // 如果这一行为空行，则不需要进行处理
+            continue;
+            }
+            if ((line.includes('第') && line.includes('章')) && (line.length < 40)){ // 如果这一行同时出现“第”和“章”两个字，并且这行的总字符数少于40个汉字，则将该行作为一段，不与下一行拼接
+            line = line.trimStart(); // 去除开头的空格
+            formatted_lines.push(line);
+            buffer = '';
+            }
+            else if (i < lines.length - 1 && !['.','。','?','？','!','！',':','：',';','；','"','”','“','＊'].includes(line.slice(-1)) && (line.length > 25) && !line.endsWith('com') && !line.endsWith('cn') && !line.endsWith('……')) { // 如果这一行不是最后一行且最后一个字符不是标点符号和特殊符号结尾，则将该行和下一行拼接成一整段
+            buffer += line.trimLeft();
+            }
+			else if (i < lines.length - 1 && (line.length = 1) && line.endsWith('“')) {
+			// 如果这一行只有一个字符“，则将该行和下一行拼接成一整段
+            buffer += line.trimLeft();
+            }
+            else {
+            buffer += line.trimLeft();
+            // 如果一行中发现了下引号上引号，则将它们替换成下引号 + 换行符 + 上引号
+            if (buffer.includes('”“')){
+            buffer = buffer.replace('”“', '”\n    “');
+            }
+            if (buffer.includes('。“')){
+            buffer = buffer.replace('。“', '。\n    “');
+            }
+            // 如果行首没有一个空格，则在开头添加四个空格
+            if (!buffer.startsWith(' ')){
+            buffer = '    ' + buffer;
+            }
+            formatted_lines.push(buffer);
+            buffer = '';
+            }
+            }
+            text = formatted_lines.join('\n');
+            // 将处理完成的文本文件提供给用户下载
+			let blob = new Blob([text], {
+			type: 'text/plain'
+			});
+			let url = URL.createObjectURL(blob);
+
+			let downloadLink = document.createElement('a');
+			downloadLink.href = url;
+
+			// 获取原文件名并添加修复完成标记
+			let fileName = files[0].name;
+			let suffixIndex = fileName.lastIndexOf('.');
+			let fixedFileName = fileName.substr(0, suffixIndex) + '_修复完成.txt';
+
+			downloadLink.download = fixedFileName;
+			downloadLink.click();
+            };
+            reader.readAsText(files[0]); // 将文件内容读取为文本
+            }
+            </script>
+            <div style="width: 100%; height: 1px; background-color: white;"><p></p></div>
+            <header>
+                <h2>机场订阅转换</h2>
+            </header>
+            <button class="toggle-button" id="t-button" style="position: fixed;bottom: 0; left: 0;">😎</button>
+            <div class="my-div collapse">
+                <div style="position: absolute;left: 50%; transform: translateX(-50%);">
+                    <div style="color: #F8F8FF;text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000;"><b>
+                        <p>1.先下载<a href="https://github.com/tindy2013/subconverter/releases" target="_blank">订阅转换工具</a>，解压并运行"subconverter.exe"</p>
+                        <p>2.节点链接或文件路径：</p>
+                        <textarea placeholder="支持单个节点、多个节点、直链和本地文件路径，注意路径包括文件名在内必须全英文" id="filepath" cols="100" rows="10"></textarea><br>
+                        <p>3.将格式转换为：</p>
+                        <select id="subtype" style="font-size: 18px;">
+                            <option value="clash">Clash</option>
+                            <option value="mixed">Base64通用</option>
+                        </select><br><br>
+                        <input type="button" value="生成链接" onclick="create();"> <br> <br>
+                        <textarea id="kd" placeholder="请先填写上面的空格并点击生成按钮，多次转换记得刷新网页" cols="100" rows="10"></textarea><br> <br>
+                        <button id="save-button">保存成yaml文件</button><button id="save-button2" style="margin-left: 10px;">保存成txt文件</button><br><br>
+                        </b>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <div style="position: fixed;bottom: 0; right: 0;">
-            <button id="generate-link-button">自动获取订阅</button>
-        </div>
-        
-        <script>
-        let toggleButton = document.querySelector('.toggle-button');
-        let content = document.querySelector('.my-div.collapse');
-        toggleButton.addEventListener('click', () => {
-        if (content.style.display === 'none') {
-        content.style.display = 'block';
-        toggleButton.textContent = '🥵';
-        } else {
-        content.style.display = 'none';
-        toggleButton.textContent = '😎';
-        }
-        });
-        </script>
-        
-<script>
-// Get the button element and add a click event listener
-var generateButton = document.getElementById("generate-link-button");
-generateButton.addEventListener("click", function() {
-// Get the current date and time
-var now = new Date();
-if (now.getHours() < 11) { // add condition to check if current time is before noon
-now.setDate(now.getDate() - 1); // set date to previous day
-}
-var formattedDate = formatDate(now);
-// Generate the link with the current date
-var link = "https://clashnode.com/wp-content/uploads/" + formattedDate.substr(0, 4) + "/" + formattedDate.substr(4, 2) + "/" + formattedDate + ".yaml";
-// Fill the textarea with the generated link
-var textarea = document.getElementById("filepath");
-textarea.value = link;
-// Copy the generated link to clipboard
-navigator.clipboard.writeText(link).then(function() {
-console.log('Link copied to clipboard.');
-}, function(error) {
-console.error('Failed to copy link: ', error);
-});
-});
-// Helper function to format the date as YYYYMMDD
-function formatDate(date) {
-var year = date.getFullYear();
-var month = date.getMonth() + 1;
-var day = date.getDate();
-if (month < 10) {
-month = "0" + month;
-}
-if (day < 10) {
-day = "0" + day;
-}
-return year + "" + month + "" + day;
-}
-</script>
-        
-        <script>
-        const saveButton = document.querySelector("#save-button");
-        const inputText = document.querySelector("#kd");
-        saveButton.addEventListener("click", function() {
-        const url = inputText.value;
-                if (url === ""){
-        alert("请先填写节点链接或文件路径并点击生成链接按钮！");
-        return false;
-        }
-        // 判断是否以"http://localhost:"开头
-        if (url.startsWith("http://localhost:")) {
-        const xhr = new XMLHttpRequest();
-        xhr.open("GET", url, true);
-        xhr.responseType = "blob";
-        
-        xhr.onload = function() {
-        if (xhr.status === 200) {
-        const blob = xhr.response;
-        const link = document.createElement("a");
-        
-        link.href = window.URL.createObjectURL(blob);
-        link.download = "订阅节点.yaml";
-        link.click();
-        }
-        };
-        
-        xhr.send();
-        }
-        // 如果链接不是以"http://localhost:"开头，则不进行下载操作
-        });
-        </script>
-        
-        <script>
-        const saveButton2 = document.querySelector("#save-button2");
-        const inputText2 = document.querySelector("#kd");
-        saveButton2.addEventListener("click", function() {
-        const url = inputText2.value;
-                if (url === ""){
-        alert("请先填写节点链接或文件路径并点击生成链接按钮！");
-        return false;
-        }
-        // 判断是否以"http://localhost:"开头
-        if (url.startsWith("http://localhost:")) {
-        const xhr = new XMLHttpRequest();
-        xhr.open("GET", url, true);
-        xhr.responseType = "blob";
-        
-        xhr.onload = function() {
-        if (xhr.status === 200) {
-        const blob = xhr.response;
-        const link = document.createElement("a");
-        
-        link.href = window.URL.createObjectURL(blob);
-        link.download = "订阅节点.txt";
-        link.click();
-        }
-        };
-        
-        xhr.send();
-        }
-        // 如果链接不是以"http://localhost:"开头，则不进行下载操作
-        });
-        </script>
-        
-        <script>
-        function  create() {
-        var input = document.getElementById('content');
-        var kd = document.getElementById('kd');
-        var filepath = document.getElementById('filepath');
-        var subtype = document.getElementById('subtype');
-        if (filepath.value===""){
-        alert("节点链接或文件路径不能为空！");
-        return false;
-        }
-        kd.href = 'http://localhost:25500/sub?target='+subtype.value+'&url='+encodeURIComponent((filepath.value).replace(/\n/g,"|"))+'&insert=false';
-        kd.style = '';
-        kd.innerText = 'http://localhost:25500/sub?target='+subtype.value+'&url='+encodeURIComponent((filepath.value).replace(/\n/g,"|"))+'&insert=false';
-        }
-        </script>
-    </body>
-</html>
+            
+            <div style="position: fixed;bottom: 0; right: 0;">
+                <button id="generate-link-button">自动获取订阅</button>
+            </div>
+            
+            <script>
+            let toggleButton = document.querySelector('.toggle-button');
+            let content = document.querySelector('.my-div.collapse');
+            toggleButton.addEventListener('click', () => {
+            if (content.style.display === 'none') {
+            content.style.display = 'block';
+            toggleButton.textContent = '🥵';
+            } else {
+            content.style.display = 'none';
+            toggleButton.textContent = '😎';
+            }
+            });
+            </script>
+            
+            <script>
+            // Get the button element and add a click event listener
+            var generateButton = document.getElementById("generate-link-button");
+            generateButton.addEventListener("click", function() {
+            // Get the current date and time
+            var now = new Date();
+            if (now.getHours() < 11) { // add condition to check if current time is before noon
+            now.setDate(now.getDate() - 1); // set date to previous day
+            }
+            var formattedDate = formatDate(now);
+            // Generate the link with the current date
+            var link = "https://clashnode.com/wp-content/uploads/" + formattedDate.substr(0, 4) + "/" + formattedDate.substr(4, 2) + "/" + formattedDate + ".yaml";
+            // Fill the textarea with the generated link
+            var textarea = document.getElementById("filepath");
+            textarea.value = link;
+            // Copy the generated link to clipboard
+            navigator.clipboard.writeText(link).then(function() {
+            console.log('Link copied to clipboard.');
+            }, function(error) {
+            console.error('Failed to copy link: ', error);
+            });
+            });
+            // Helper function to format the date as YYYYMMDD
+            function formatDate(date) {
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            if (month < 10) {
+            month = "0" + month;
+            }
+            if (day < 10) {
+            day = "0" + day;
+            }
+            return year + "" + month + "" + day;
+            }
+            </script>
+            
+            <script>
+            const saveButton = document.querySelector("#save-button");
+            const inputText = document.querySelector("#kd");
+            saveButton.addEventListener("click", function() {
+            const url = inputText.value;
+            if (url === ""){
+            alert("请先填写节点链接或文件路径并点击生成链接按钮！");
+            return false;
+            }
+            // 判断是否以"http://localhost:"开头
+            if (url.startsWith("http://localhost:")) {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", url, true);
+            xhr.responseType = "blob";
+            
+            xhr.onload = function() {
+            if (xhr.status === 200) {
+            const blob = xhr.response;
+            const link = document.createElement("a");
+            
+            link.href = window.URL.createObjectURL(blob);
+            link.download = "订阅节点.yaml";
+            link.click();
+            }
+            };
+            
+            xhr.send();
+            }
+            // 如果链接不是以"http://localhost:"开头，则不进行下载操作
+            });
+            </script>
+            
+            <script>
+            const saveButton2 = document.querySelector("#save-button2");
+            const inputText2 = document.querySelector("#kd");
+            saveButton2.addEventListener("click", function() {
+            const url = inputText2.value;
+            if (url === ""){
+            alert("请先填写节点链接或文件路径并点击生成链接按钮！");
+            return false;
+            }
+            // 判断是否以"http://localhost:"开头
+            if (url.startsWith("http://localhost:")) {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", url, true);
+            xhr.responseType = "blob";
+            
+            xhr.onload = function() {
+            if (xhr.status === 200) {
+            const blob = xhr.response;
+            const link = document.createElement("a");
+            
+            link.href = window.URL.createObjectURL(blob);
+            link.download = "订阅节点.txt";
+            link.click();
+            }
+            };
+            
+            xhr.send();
+            }
+            // 如果链接不是以"http://localhost:"开头，则不进行下载操作
+            });
+            </script>
+            
+            <script>
+            function  create() {
+            var input = document.getElementById('content');
+            var kd = document.getElementById('kd');
+            var filepath = document.getElementById('filepath');
+            var subtype = document.getElementById('subtype');
+            if (filepath.value===""){
+            alert("节点链接或文件路径不能为空！");
+            return false;
+            }
+            kd.href = 'http://localhost:25500/sub?target='+subtype.value+'&url='+encodeURIComponent((filepath.value).replace(/\n/g,"|"))+'&insert=false';
+            kd.style = '';
+            kd.innerText = 'http://localhost:25500/sub?target='+subtype.value+'&url='+encodeURIComponent((filepath.value).replace(/\n/g,"|"))+'&insert=false';
+            }
+            </script>
+        </body>
+    </html>
